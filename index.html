@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клавиатурный тренажёр — слепая печать на русском и английском</title>
+<meta name="description" content="Бесплатный онлайн-тренажёр слепой десятипальцевой печати на русском и английском языке. Уроки, подсветка клавиш и пальцев, скорость и точность.">
+
+<!-- ====== СЮДА ПОТОМ ВСТАВИТЕ КОД РЕКЛАМЫ (см. инструкцию, Часть 6) ====== -->
+
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --text:#1d2433; --muted:#6b7385;
+    --accent:#2f6fed; --ok:#1f9d55; --err:#d64545; --key:#eef0f6; --border:#dde1ea;
+    --f1:#ffd6d6; --f2:#ffe7c2; --f3:#fff6b8; --f4:#d6f5d6; --f5:#d6ecff; --f6:#e6dcff; --f7:#ffd9f0; --f8:#d9f7f3; --thumb:#e9e9e9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 16px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0}
+  h1{font-size:20px;margin:0}
+  .controls{display:flex;gap:8px;flex-wrap:wrap}
+  select,button{font:inherit;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer}
+  button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  main{padding:20px 0}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
+  .stat b{display:block;font-size:24px}
+  .stat span{color:var(--muted);font-size:13px}
+  #text{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;font-family:Consolas,"Courier New",monospace;font-size:24px;line-height:1.7;min-height:120px;word-break:break-word;outline:none}
+  #text:focus{border-color:var(--accent)}
+  .c-done{color:var(--ok)}
+  .c-err{color:#fff;background:var(--err);border-radius:3px}
+  .c-cur{background:#cfe0ff;border-bottom:3px solid var(--accent)}
+  .hint{color:var(--muted);font-size:14px;margin:8px 0 16px}
+  #kb{display:flex;flex-direction:column;gap:6px;align-items:center;margin-top:10px;user-select:none}
+  .row{display:flex;gap:6px}
+  .k{min-width:44px;height:44px;border-radius:7px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--key)}
+  .k.active{outline:3px solid var(--accent);transform:translateY(-2px);font-weight:700}
+  .k.home::after{content:"";position:absolute}
+  .f1{background:var(--f1)}.f2{background:var(--f2)}.f3{background:var(--f3)}.f4{background:var(--f4)}
+  .f5{background:var(--f5)}.f6{background:var(--f6)}.f7{background:var(--f7)}.f8{background:var(--f8)}
+  .space{min-width:300px;background:var(--thumb)}
+  .ad-slot{margin:20px 0;min-height:90px;border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+  #result{display:none;background:var(--card);border:2px solid var(--ok);border-radius:12px;padding:16px;margin-top:14px}
+  footer{color:var(--muted);font-size:13px;padding:20px 0 40px;text-align:center}
+  footer a{color:var(--muted)}
+  @media (max-width:700px){.k{min-width:22px;height:30px;font-size:11px}.space{min-width:140px}.stats{grid-template-columns:repeat(2,1fr)}#text{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1 id="title">Клавиатурный тренажёр</h1>
+    <div class="controls">
+      <select id="lang">
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+      </select>
+      <select id="lesson"></select>
+      <button class="primary" id="restart">Начать заново</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Рекламный блок №1 (верх). Сюда вставите код блока -->
+  <div class="ad-slot" id="ad-top">Место для рекламы</div>
+
+  <div class="stats">
+    <div class="stat"><b id="sSpeed">0</b><span id="lSpeed">знаков/мин</span></div>
+    <div class="stat"><b id="sAcc">100%</b><span id="lAcc">точность</span></div>
+    <div class="stat"><b id="sErr">0</b><span id="lErr">ошибки</span></div>
+    <div class="stat"><b id="sTime">0:00</b><span id="lTime">время</span></div>
+  </div>
+
+  <div id="text" tabindex="0"></div>
+  <p class="hint" id="hint">Нажмите на текст и начинайте печатать. Не смотрите на клавиатуру — смотрите на подсказку внизу.</p>
+
+  <div id="kb"></div>
+
+  <div id="result"></div>
+
+  <!-- Рекламный блок №2 (низ) -->
+  <div class="ad-slot" id="ad-bottom">Место для рекламы</div>
+
+  <section id="about"></section>
+</main>
+
+<footer>
+  © <span id="year"></span> · <a href="privacy.html">Политика конфиденциальности / Privacy Policy</a>
+</footer>
+
+<script>
+// ===================== ДАННЫЕ =====================
+// Раскладки клавиатуры (ЙЦУКЕН и QWERTY)
+const LAYOUTS = {
+  ru: [
+    ["ё","1","2","3","4","5","6","7","8","9","0","-","="],
+    ["й","ц","у","к","е","н","г","ш","щ","з","х","ъ"],
+    ["ф","ы","в","а","п","р","о","л","д","ж","э"],
+    ["я","ч","с","м","и","т","ь","б","ю","."]
+  ],
+  en: [
+    ["`","1","2","3","4","5","6","7","8","9","0","-","="],
+    ["q","w","e","r","t","y","u","i","o","p","[","]"],
+    ["a","s","d","f","g","h","j","k","l",";","'"],
+    ["z","x","c","v","b","n","m",",",".","/"]
+  ]
+};
+// Какой палец нажимает клавишу (номер столбца → палец)
+// f1 мизинец левый ... f4 указательный левый, f5 указательный правый ... f8 мизинец правый
+const FINGERS = [
+  ["f1","f1","f2","f3","f4","f4","f5","f5","f6","f7","f8","f8","f8"],
+  ["f1","f2","f3","f4","f4","f5","f5","f6","f7","f8","f8","f8"],
+  ["f1","f2","f3","f4","f4","f5","f5","f6","f7","f8","f8"],
+  ["f1","f2","f3","f4","f4","f5","f5","f6","f7","f8"]
+];
+
+// Уроки. Добавляйте свои — просто допишите строку в список.
+const LESSONS = {
+  ru: [
+    {name:"1. Основной ряд: а о", text:"ааа ооо аоа оао аа оо ао оа аоао оаоа ааоо ооаа"},
+    {name:"2. Основной ряд: в л", text:"ввв ллл вал лов вол ала ола вала лава овал вола"},
+    {name:"3. Основной ряд: ы д", text:"ыыы ддд дыл дал ода вода дыра доля лады дало"},
+    {name:"4. Основной ряд: ф ж", text:"фал жал лаж фол жова фото дож жало лафа"},
+    {name:"5. Основной ряд: п р", text:"пар рад пол рол плов прав ропа пора лапа дорога"},
+    {name:"6. Основной ряд: э", text:"эра эло эпол эх дол рад пол лод эра эпоха"},
+    {name:"7. Верхний ряд: к е н г", text:"кен нег рек ген кол нога река лето голова негр крона"},
+    {name:"8. Верхний ряд: у ш ц щ", text:"шум уха щука цена шарф уголь щека цапля шапка"},
+    {name:"9. Нижний ряд: м и т ь", text:"мир тип мать тиль мило тема имя мама тетрадь"},
+    {name:"10. Нижний ряд: с б ч ю я", text:"сыр бал час юла яма собака часы юбка ягода"},
+    {name:"11. Слова", text:"мама мыла раму папа читал газету солнце светит ярко дети играют во дворе"},
+    {name:"12. Фразы", text:"съешь же ещё этих мягких французских булок да выпей чаю"}
+  ],
+  en: [
+    {name:"1. Home row: f j", text:"fff jjj fjf jfj ff jj fj jf fjfj jfjf ffjj jjff"},
+    {name:"2. Home row: d k", text:"ddd kkk dkd kdk dk kd fdjk kjdf dkdk jfkd"},
+    {name:"3. Home row: s l", text:"sss lll sls lsl sad lad fall ask lass flask"},
+    {name:"4. Home row: a ;", text:"aaa ;;; a;a ;a; ask; dad; salad; flask; all;"},
+    {name:"5. Home row: g h", text:"gag had gash half glad dash shall flag hash"},
+    {name:"6. Top row: e i", text:"see lie die fee kid like file side idea field"},
+    {name:"7. Top row: r u t y", text:"rut try yet tree true your tray turkey their"},
+    {name:"8. Top row: w o q p", text:"wow pop quote power proper owl quip whip"},
+    {name:"9. Bottom row: n m v b", text:"man van bin mob numb vibe ban move band"},
+    {name:"10. Bottom row: c x z", text:"cat box zoo fax zinc exact cozy maze vex"},
+    {name:"11. Words", text:"the quick brown fox jumps over the lazy dog every day"},
+    {name:"12. Sentences", text:"practice makes perfect so keep typing every day and you will improve"}
+  ]
+};
+
+// Тексты интерфейса на двух языках
+const UI = {
+  ru:{title:"Клавиатурный тренажёр", restart:"Начать заново", speed:"знаков/мин", acc:"точность", err:"ошибки", time:"время",
+      hint:"Нажмите на текст и начинайте печатать. Не смотрите на клавиатуру — смотрите на подсказку внизу.",
+      done:"Готово! Скорость: {s} знаков/мин, точность: {a}%, ошибок: {e}. Нажмите «Начать заново» или выберите следующий урок.",
+      about:"<h2>Как научиться слепой печати</h2><p>Поставьте пальцы на основной ряд: левая рука — Ф Ы В А, правая — О Л Д Ж. На клавишах А и О обычно есть выступы, их можно найти на ощупь. Каждый палец отвечает за свой столбец клавиш — цвет на подсказке показывает, каким пальцем нажимать.</p><p>Занимайтесь по 15–20 минут в день. Сначала добивайтесь точности, скорость придёт сама.</p>"},
+  en:{title:"Typing Trainer", restart:"Restart", speed:"chars/min", acc:"accuracy", err:"errors", time:"time",
+      hint:"Click the text and start typing. Don't look at your keyboard — look at the hint below.",
+      done:"Done! Speed: {s} chars/min, accuracy: {a}%, errors: {e}. Press Restart or pick the next lesson.",
+      about:"<h2>How to learn touch typing</h2><p>Place your fingers on the home row: left hand on A S D F, right hand on J K L ;. The F and J keys have small bumps you can feel. Each finger is responsible for its own column — the colour on the hint shows which finger to use.</p><p>Practise 15–20 minutes a day. Focus on accuracy first; speed will follow.</p>"}
+};
+
+// ===================== ЛОГИКА =====================
+const $ = id => document.getElementById(id);
+let lang = "ru", text = "", pos = 0, errors = 0, typed = 0, startTime = null, timer = null, wrongAt = new Set();
+
+function buildLessons(){
+  $("lesson").innerHTML = LESSONS[lang].map((l,i)=>`<option value="${i}">${l.name}</option>`).join("");
+}
+function buildKeyboard(){
+  const kb = $("kb"); kb.innerHTML = "";
+  LAYOUTS[lang].forEach((row,r)=>{
+    const div = document.createElement("div"); div.className="row";
+    row.forEach((ch,c)=>{
+      const k=document.createElement("div");
+      k.className="k "+FINGERS[r][c]; k.textContent=ch.toUpperCase(); k.dataset.ch=ch;
+      div.appendChild(k);
+    });
+    kb.appendChild(div);
+  });
+  const sp=document.createElement("div"); sp.className="row";
+  sp.innerHTML='<div class="k space" data-ch=" ">space</div>'; kb.appendChild(sp);
+}
+function applyUI(){
+  const t=UI[lang];
+  $("title").textContent=t.title; $("restart").textContent=t.restart;
+  $("lSpeed").textContent=t.speed; $("lAcc").textContent=t.acc; $("lErr").textContent=t.err; $("lTime").textContent=t.time;
+  $("hint").textContent=t.hint; $("about").innerHTML=t.about;
+  document.documentElement.lang=lang;
+}
+function render(){
+  let html="";
+  for(let i=0;i<text.length;i++){
+    let ch=text[i]===" "?"&nbsp;":text[i];
+    // напечатано — зелёным; текущая буква — подсвечена (красным, если по ней уже ошиблись)
+    let cls = "";
+    if(i<pos) cls="c-done";
+    else if(i===pos) cls = wrongAt.has(i) ? "c-cur c-err" : "c-cur";
+    html+=`<span class="${cls}">${ch}</span>`;
+  }
+  $("text").innerHTML=html;
+  document.querySelectorAll(".k").forEach(k=>k.classList.remove("active"));
+  const next=(text[pos]||"").toLowerCase();
+  const key=[...document.querySelectorAll(".k")].find(k=>k.dataset.ch===next);
+  if(key) key.classList.add("active");
+}
+function updateStats(){
+  const sec = startTime ? (Date.now()-startTime)/1000 : 0;
+  const speed = sec>0 ? Math.round(pos/sec*60) : 0;
+  const acc = typed>0 ? Math.max(0,Math.round((typed-errors)/typed*100)) : 100;
+  $("sSpeed").textContent=speed; $("sAcc").textContent=acc+"%"; $("sErr").textContent=errors;
+  const m=Math.floor(sec/60), s=Math.floor(sec%60);
+  $("sTime").textContent=m+":"+String(s).padStart(2,"0");
+  return {speed,acc};
+}
+function start(){
+  text=LESSONS[lang][+$("lesson").value||0].text;
+  pos=0; errors=0; typed=0; startTime=null; wrongAt=new Set();
+  clearInterval(timer); $("result").style.display="none";
+  render(); updateStats(); $("text").focus();
+}
+function finish(){
+  clearInterval(timer);
+  const {speed,acc}=updateStats();
+  $("result").textContent=UI[lang].done.replace("{s}",speed).replace("{a}",acc).replace("{e}",errors);
+  $("result").style.display="block";
+}
+document.addEventListener("keydown",e=>{
+  if(pos>=text.length) return;
+  if(e.key.length!==1 || e.ctrlKey || e.altKey || e.metaKey) return;
+  e.preventDefault();
+  if(!startTime){ startTime=Date.now(); timer=setInterval(updateStats,500); }
+  typed++;
+  const expected=text[pos];
+  if(e.key===expected || (e.key==="ё"&&expected==="е")){
+    pos++;
+  } else {
+    errors++; wrongAt.add(pos);
+  }
+  render(); updateStats();
+  if(pos>=text.length) finish();
+});
+$("lang").addEventListener("change",e=>{lang=e.target.value; buildLessons(); buildKeyboard(); applyUI(); start();});
+$("lesson").addEventListener("change",start);
+$("restart").addEventListener("click",start);
+$("year").textContent=new Date().getFullYear();
+
+buildLessons(); buildKeyboard(); applyUI(); start();
+</script>
+</body>
+</html>
