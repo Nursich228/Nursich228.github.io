@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест скорости печати онлайн за 1 минуту — PracticeTap</title>
+<meta name="description" content="Бесплатный тест скорости печати на русском и английском: печатай 1 минуту и узнай свою скорость в знаках в минуту, точность и число ошибок.">
+<link rel="canonical" href="https://practicetap.com/test-skorosti/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://practicetap.com/test-skorosti/">
+<meta property="og:title" content="Тест скорости печати за 1 минуту">
+<meta property="og:description" content="Бесплатный тест скорости печати на русском и английском: печатай 1 минуту и узнай свою скорость в знаках в минуту, точность и число ошибок.">
+<meta property="og:site_name" content="PracticeTap">
+<meta property="og:image" content="https://practicetap.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PracticeTap — тренажер слепой печати">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#4f6bed">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234f6bed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='38' font-weight='700' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+
+<!-- ====== СЮДА ПОТОМ ВСТАВИТЕ КОД РЕКЛАМЫ (см. инструкцию, Часть 6) ====== -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114137987', 'ym');
+
+    ym(114137987, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114137987" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script>
+/* Тема (светлая / темная) включается сразу, чтобы страница не мигала */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('pt_theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Nunito:wght@500;700;800&display=swap">
+
+<link rel="stylesheet" href="/app.css">
+</head>
+<body class="page-test">
+<div class="app">
+
+  <!-- ===== Шапка: логотип и кнопки ===== -->
+  <header class="top fade-on-focus">
+    <a class="logo" href="/">
+      <span class="logo-key">P</span>
+      <span class="logo-text"><b>PracticeTap</b><small data-i="tagline">тренажер слепой печати</small></span>
+    </a>
+    <h1 class="sr-only">Тест скорости печати онлайн за 1 минуту</h1>
+    <div class="tools">
+      <button class="icon-btn" id="btnTheme" type="button" data-tip="themeTip">
+        <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <div class="settings">
+        <button class="icon-btn" id="btnSettings" type="button" aria-expanded="false" aria-controls="settingsMenu" data-tip="settingsTip">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+        <div class="menu" id="settingsMenu" hidden>
+          <div class="menu-row"><span data-i="langTip">Язык сайта</span><span class="seg"><button type="button" data-ui="ru">RU</button><button type="button" data-ui="en">EN</button></span></div>
+          <button class="menu-row" id="btnFocus" type="button" aria-pressed="true"><span><span data-i="focus">Фокус</span><small data-i="focusTip">Во время печати прячет все лишнее</small></span><span class="knob"></span></button>
+          <button class="menu-row" id="btnSound" type="button" aria-pressed="false"><span><span data-i="sound">Звук</span><small data-i="soundTip">Сигнал при ошибке</small></span><span class="knob"></span></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-slot" id="ad-top"><!-- Рекламный блок №1 (верх): сюда вставите код блока --></div>
+
+  <!-- ===== Выбор языка, уровня и урока ===== -->
+  <section class="card picker fade-on-focus">
+    <div class="modes">
+      <button class="mode" type="button" data-mode="ru"><span class="mode-ico">Аа</span><span data-i="modeRu">Русский</span></button>
+      <button class="mode" type="button" data-mode="en"><span class="mode-ico">Aa</span><span data-i="modeEn">English</span></button>
+      <button class="mode" type="button" data-mode="code"><span class="mode-ico">&lt;/&gt;</span><span data-i="modeCode">Код</span></button>
+    </div>
+    <div class="go-row">
+      <button class="go-btn" id="btnGo" type="button"><span class="play" aria-hidden="true">▶</span><span id="goText">Продолжить</span></button>
+      <button class="pick-toggle" id="btnPick" type="button" aria-expanded="false" aria-controls="pickPanel">
+        <span class="pt-text"><b id="pickMain"></b><small id="pickSub"></small></span>
+        <span class="arrow" aria-hidden="true">▼</span>
+      </button>
+    </div>
+    <div class="pick-panel" id="pickPanel" hidden>
+      <div class="levels" id="levels"></div>
+      <div class="lessons" id="lessons"></div>
+    </div>
+  </section>
+
+  <!-- ===== Тренажер ===== -->
+  <section class="card trainer" id="trainer">
+    <div class="lesson-head">
+      <div class="lesson-title" id="lessonTitle"></div>
+      <div class="stats">
+        <div class="stat"><b id="sSpeed">0</b><span id="lSpeed">зн/мин</span></div>
+        <div class="stat"><b id="sAcc">100%</b><span data-i="acc">точность</span></div>
+        <div class="stat"><b id="sErr">0</b><span data-i="errors">ошибки</span></div>
+        <div class="stat"><b id="sTime">0:00</b><span data-i="time">время</span></div>
+      </div>
+    </div>
+    <div class="progress"><i id="progressBar"></i></div>
+    <div class="board" id="board">
+      <div class="line" id="line"><div class="track" id="track"></div></div>
+      <div class="block" id="block" hidden></div>
+      <textarea class="hidden-input" id="hiddenInput" aria-label="Поле для печати" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    </div>
+    <div class="hint" id="hint" aria-live="polite"></div>
+    <div class="controls">
+      <button class="btn" id="btnRestart" type="button"><span aria-hidden="true">↻</span><span data-i="restart">Заново</span></button>
+      <button class="btn" id="btnCustom" type="button"><span aria-hidden="true">✎</span><span data-i="custom">Свой текст</span></button>
+      <button class="btn" id="btnKb" type="button" aria-pressed="true" data-tip="kbTip"><span aria-hidden="true">⌨</span><span data-i="keyboard">Клавиатура</span></button>
+    </div>
+    <div class="kb-wrap" id="kbWrap">
+      <div class="kb" id="kb"></div>
+      <div class="hands-wrap" id="handsWrap">
+        <svg class="hands" id="hands" viewBox="0 0 640 244" role="img" aria-label="Какой палец нажимает какую клавишу"></svg>
+        <div class="legend">
+          <span class="f-lp"><i></i><b data-i="lg1">мизинцы</b></span>
+          <span class="f-lr"><i></i><b data-i="lg2">безымянные</b></span>
+          <span class="f-lm"><i></i><b data-i="lg3">средние</b></span>
+          <span class="f-li"><i></i><b data-i="lg4">указательные</b></span>
+          <span class="f-th"><i></i><b data-i="lg5">большие — пробел</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Статистика ===== -->
+  <section class="card stats-card fade-on-focus">
+    <h2><span data-i="statsTitle">Моя статистика</span> · <span id="statsMode"></span></h2>
+    <div class="summary">
+      <div><b id="stDone">0</b><span data-i="lessonsDone">уроков пройдено</span></div>
+      <div><b id="stBest">0</b><span data-i="best">лучшая скорость</span></div>
+      <div><b id="stTyped">0</b><span data-i="typed">знаков напечатано</span></div>
+    </div>
+    <h3 data-i="errTitle">Где больше всего ошибок</h3>
+    <div class="chart" id="chartAll"></div>
+    <p class="chart-note" data-i="errNote">Цвет полоски — палец, которым нажимается клавиша.</p>
+    <p class="note" id="statsMsg" hidden></p>
+    <div class="row">
+      <button class="btn primary" id="btnTrouble" type="button" data-i="trouble">Тренировать трудные буквы</button>
+      <button class="btn ghost" id="btnReset" type="button" data-i="reset">Сбросить статистику</button>
+    </div>
+  </section>
+
+  <!-- ===== Предложения разработчику ===== -->
+  <section class="card feedback fade-on-focus" id="fbCard">
+    <button class="fb-close" id="btnFbHide" type="button" data-tip="fbHide">✕</button>
+    <h2 data-i="fbTitle">Помогите нам стать лучше</h2>
+    <div class="fb-grid">
+      <div class="fb-box">
+        <p data-i="likeQ">Нравится сайт?</p>
+        <div class="votes" id="votes">
+          <button class="vote" id="btnLike" type="button" data-v="like"><span class="em" aria-hidden="true">👍</span><span data-i="likeYes">Нравится</span></button>
+          <button class="vote" id="btnDislike" type="button" data-v="dislike"><span class="em" aria-hidden="true">👎</span><span data-i="likeNo">Не нравится</span></button>
+        </div>
+        <div class="vote-count" aria-live="polite"><span>👍 <b id="cntLike">…</b></span><span>👎 <b id="cntDislike">…</b></span></div>
+        <p class="muted" id="voteMsg" hidden></p>
+      </div>
+      <div class="fb-box">
+        <p data-i="ideaQ">Есть идея или нашли ошибку?</p>
+        <p class="muted" data-i="fbText">Напиши, что добавить или исправить, — разработчик прочитает каждое сообщение.</p>
+        <button class="btn primary" id="btnFeedback" type="button" data-i="fbBtn">Предложить идею</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Текст о тесте ===== -->
+  <section class="card seo fade-on-focus">
+    <h2>Тест скорости печати онлайн</h2>
+    <p>Проверь, сколько знаков в минуту ты печатаешь. Нажми «Начать тест» и печатай слова на экране, пока идет таймер. Через минуту увидишь свою скорость, точность и число ошибок. Тест бесплатный, работает прямо в браузере, на русском и английском языке.</p>
+    <h3>Какая скорость считается хорошей</h3>
+    <ul>
+      <li>до 100 знаков в минуту — начальный уровень, обычно человек смотрит на клавиатуру;</li>
+      <li>150–200 знаков в минуту — средняя скорость большинства людей;</li>
+      <li>250–300 знаков в минуту — хорошая скорость, обычно это уже слепая печать;</li>
+      <li>больше 400 знаков в минуту — очень быстро, уровень профессионалов.</li>
+    </ul>
+    <h3>Как печатать быстрее</h3>
+    <p>Скорость растет, когда пальцы знают клавиши на ощупь. Пройди уроки слепой печати в <a href="/">тренажере PracticeTap</a> по 10–15 минут в день и проходи тест раз в неделю, чтобы видеть прогресс.</p>
+  </section>
+  <div class="ad-slot" id="ad-bottom"><!-- Рекламный блок №2 (низ): сюда вставите код блока --></div>
+
+  <footer class="fade-on-focus"><nav class="foot-nav"><a href="/" data-i="navMain">Тренажер</a><a href="/test-skorosti/" data-i="navTest">Тест скорости печати</a><a href="/kazakh/" data-i="navKz">Казахская раскладка</a></nav>© <span id="year">2026</span> PracticeTap · <a href="/privacy.html" data-i="footerPrivacy">Политика конфиденциальности</a> · <a href="mailto:dester1310@gmail.com">dester1310@gmail.com</a><span id="rateWrap" hidden> · <button class="link-btn" id="btnShowFb" type="button" data-i="rateSite">Оценить сайт</button></span></footer>
+</div>
+
+<!-- ===== Окно с результатом ===== -->
+<div class="modal" id="resModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resTitle">
+    <div class="stars" id="resStars"></div>
+    <h2 id="resTitle"></h2>
+    <div class="res-grid">
+      <div><b id="rSpeed">0</b><span id="rSpeedL"></span><small id="rSpeedSub"></small></div>
+      <div><b id="rAcc">0</b><span data-i="acc">точность</span></div>
+      <div><b id="rErr">0</b><span data-i="errors">ошибки</span></div>
+      <div><b id="rTime">0</b><span data-i="time">время</span></div>
+    </div>
+    <p class="stars-note" data-i="starsNote"></p>
+    <h3 data-i="resErr">Ошибки в этом уроке</h3>
+    <div class="chart" id="resChart"></div>
+    <div class="modal-actions">
+      <button class="btn" id="btnAgain" type="button"><span data-i="again">Еще раз</span><kbd>Esc</kbd></button>
+      <button class="btn primary" id="btnNext" type="button" data-autofocus><span data-i="next">Дальше</span><kbd>Enter</kbd></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Окно «Свой текст» ===== -->
+<div class="modal" id="customModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="customTitle">
+    <h2 id="customTitle" data-i="customTitle">Свой текст</h2>
+    <p class="muted" data-i="customHelp"></p>
+    <textarea id="customText" maxlength="3000" data-ph="customPh" data-autofocus></textarea>
+    <div class="modal-actions">
+      <button class="btn" id="btnCustomCancel" type="button" data-i="cancel">Отмена</button>
+      <button class="btn primary" id="btnCustomGo" type="button" data-i="customGo">Печатать</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Окно «Предложить идею» ===== -->
+<div class="modal" id="feedbackModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="fbModalTitle">
+    <h2 id="fbModalTitle" data-i="fbBtn">Предложить идею</h2>
+    <p class="muted" data-i="fbHelp"></p>
+    <textarea id="fbText" maxlength="3000" data-ph="fbPh" data-autofocus></textarea>
+    <div class="modal-actions">
+      <button class="btn" id="btnFbCancel" type="button" data-i="cancel">Отмена</button>
+      <button class="btn primary" id="btnFbSend" type="button" data-i="fbSend">Отправить</button>
+    </div>
+  </div>
+</div>
+
+<script>window.PT_PAGE = { kind: 'test', title: { ru: 'Тест скорости печати онлайн за 1 минуту — PracticeTap', en: 'Typing speed test online in 1 minute — PracticeTap' } };</script>
+<script src="/app.js"></script>
+</body>
+</html>
