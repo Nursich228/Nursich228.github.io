@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PracticeTap — тренажёр слепой печати онлайн: русский, английский и код</title>
-<meta name="description" content="Бесплатный клавиатурный тренажёр слепой печати для детей и взрослых: русский и английский языки, тренировка набора кода, подсказка пальцев, статистика ошибок, светлая и тёмная тема.">
+<title>PracticeTap — тренажер слепой печати онлайн: русский, английский и код</title>
+<meta name="description" content="Бесплатный клавиатурный тренажер слепой печати для детей и взрослых: русский и английский языки, тренировка набора кода, подсказка пальцев, статистика ошибок, светлая и темная тема.">
 <link rel="canonical" href="https://practicetap.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://practicetap.com/">
-<meta property="og:title" content="PracticeTap — тренажёр слепой печати">
+<meta property="og:title" content="PracticeTap — тренажер слепой печати">
 <meta property="og:description" content="Учись печатать вслепую на русском и английском и набирать код быстрее. Бесплатно, прямо в браузере.">
 <meta name="theme-color" content="#4f6bed">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234f6bed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='38' font-weight='700' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
@@ -30,7 +30,7 @@
 <!-- /Yandex.Metrika counter -->
 
 <script>
-/* Тема (светлая / тёмная) включается сразу, чтобы страница не мигала */
+/* Тема (светлая / темная) включается сразу, чтобы страница не мигала */
 (function () {
   var t = null;
   try { t = localStorage.getItem('pt_theme'); } catch (e) {}
@@ -141,7 +141,7 @@ html[data-theme="light"] .i-sun,html[data-theme="dark"] .i-moon{display:none}
 .guide li{flex:1 1 220px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px dashed var(--border2);border-radius:15px;padding:8px 12px;font-weight:700;font-size:14px;color:var(--muted)}
 .guide b{flex:0 0 28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:800}
 
-/* ===================== ТРЕНАЖЁР ===================== */
+/* ===================== ТРЕНАЖЕР ===================== */
 .trainer{padding:16px}
 .lesson-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .lesson-title{font-weight:800;font-size:19px;line-height:1.25;margin:0}
@@ -207,7 +207,10 @@ html[data-theme="light"] .i-sun,html[data-theme="dark"] .i-moon{display:none}
 .legend i{width:12px;height:12px;border-radius:50%;background:var(--fs)}
 
 /* ===================== СТАТИСТИКА ===================== */
-.stats-card,.howto{padding:18px 20px;margin-top:14px}
+.stats-card,.feedback{padding:18px 20px;margin-top:14px}
+.feedback{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.feedback h2{margin:0 0 4px}
+.feedback .muted{margin:0}
 .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 4px}
 .summary div{background:var(--surface2);border:1px solid var(--border);border-radius:13px;padding:10px;text-align:center}
 .summary b{display:block;font-size:22px;font-weight:800}
@@ -279,9 +282,9 @@ footer a{color:var(--muted)}
   <header class="top fade-on-focus">
     <a class="logo" href="/">
       <span class="logo-key">P</span>
-      <span class="logo-text"><b>PracticeTap</b><small data-i="tagline">тренажёр слепой печати</small></span>
+      <span class="logo-text"><b>PracticeTap</b><small data-i="tagline">тренажер слепой печати</small></span>
     </a>
-    <h1 class="sr-only">PracticeTap — тренажёр слепой печати онлайн для детей и взрослых</h1>
+    <h1 class="sr-only">PracticeTap — тренажер слепой печати онлайн для детей и взрослых</h1>
     <div class="tools">
       <button class="switch" id="btnFocus" type="button" aria-pressed="true" data-tip="focusTip"><span class="knob"></span><span data-i="focus">Фокус</span></button>
       <button class="icon-btn" id="btnSound" type="button" data-tip="soundTip">
@@ -309,13 +312,7 @@ footer a{color:var(--muted)}
     <div class="lessons" id="lessons"></div>
   </section>
 
-  <ol class="guide fade-on-focus">
-    <li><b>1</b><span data-i="g1">Выбери язык и урок</span></li>
-    <li><b>2</b><span data-i="g2">Поставь пальцы, как на картинке внизу</span></li>
-    <li><b>3</b><span data-i="g3">Печатай подсвеченную букву, не глядя на клавиатуру</span></li>
-  </ol>
-
-  <!-- ===== Тренажёр ===== -->
+  <!-- ===== Тренажер ===== -->
   <section class="card trainer" id="trainer">
     <div class="lesson-head">
       <div class="lesson-title" id="lessonTitle"></div>
@@ -334,14 +331,13 @@ footer a{color:var(--muted)}
     </div>
     <div class="hint" id="hint" aria-live="polite"></div>
     <div class="controls">
-      <button class="btn" id="btnRestart" type="button"><span aria-hidden="true">↻</span><span data-i="restart">Заново</span><kbd>Esc</kbd></button>
+      <button class="btn" id="btnRestart" type="button"><span aria-hidden="true">↻</span><span data-i="restart">Заново</span></button>
       <button class="btn" id="btnCustom" type="button"><span aria-hidden="true">✎</span><span data-i="custom">Свой текст</span></button>
       <button class="btn" id="btnKb" type="button" aria-pressed="true" data-tip="kbTip"><span aria-hidden="true">⌨</span><span data-i="keyboard">Клавиатура</span></button>
     </div>
     <div class="kb-wrap" id="kbWrap">
       <div class="kb" id="kb"></div>
       <div class="hands-wrap" id="handsWrap">
-        <p class="hands-cap" id="handsCap"></p>
         <svg class="hands" id="hands" viewBox="0 0 640 244" role="img" aria-label="Какой палец нажимает какую клавишу"></svg>
         <div class="legend">
           <span class="f-lp"><i></i><b data-i="lg1">мизинцы</b></span>
@@ -372,20 +368,13 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <!-- ===== Как пользоваться (текст для людей и поисковиков) ===== -->
-  <section class="card howto fade-on-focus" id="howto" data-ih="howto">
-    <h2>Как научиться печатать вслепую</h2>
-    <div class="tips">
-      <div class="tip"><span class="tip-n">1</span><h3>Пальцы на место</h3><p>Левая рука лежит на Ф Ы В А, правая — на О Л Д Ж. На клавишах А и О есть бугорки: их можно найти на ощупь.</p></div>
-      <div class="tip"><span class="tip-n">2</span><h3>Смотри на экран</h3><p>Не подглядывай на клавиатуру. Цвет клавиши и светящийся палец подскажут, чем нажимать.</p></div>
-      <div class="tip"><span class="tip-n">3</span><h3>Сначала точность</h3><p>Печатай без ошибок, даже если медленно. Скорость придёт сама, если заниматься по 10–15 минут каждый день.</p></div>
+  <!-- ===== Предложения разработчику ===== -->
+  <section class="card feedback fade-on-focus">
+    <div>
+      <h2 data-i="fbTitle">Есть идея, как сделать сайт лучше?</h2>
+      <p class="muted" data-i="fbText">Напиши, что добавить или исправить, — разработчик прочитает каждое сообщение.</p>
     </div>
-    <h3>Тренажёр для программистов</h3>
-    <p>В разделе «Код» есть скобки и операторы, ключевые слова и настоящие примеры на Python, JavaScript, HTML, CSS, SQL и командах Git. После Enter отступ ставится сам — как в редакторе кода.</p>
-    <h3>Горячие клавиши</h3>
-    <p><kbd>Esc</kbd> — начать урок заново, <kbd>Enter</kbd> — следующий урок на экране с результатом. Ошибся — просто нажми правильную клавишу, ничего стирать не нужно.</p>
-    <h3>Если у тебя Mac</h3>
-    <p>Чтобы точка и запятая были там же, где на схеме, включи раскладку «Русская – ПК» в настройках клавиатуры.</p>
+    <button class="btn primary" id="btnFeedback" type="button" data-i="fbBtn">Предложить идею</button>
   </section>
 
   <div class="ad-slot" id="ad-bottom"><!-- Рекламный блок №2 (низ): сюда вставите код блока --></div>
@@ -408,7 +397,7 @@ footer a{color:var(--muted)}
     <h3 data-i="resErr">Ошибки в этом уроке</h3>
     <div class="chart" id="resChart"></div>
     <div class="modal-actions">
-      <button class="btn" id="btnAgain" type="button"><span data-i="again">Ещё раз</span><kbd>Esc</kbd></button>
+      <button class="btn" id="btnAgain" type="button"><span data-i="again">Еще раз</span><kbd>Esc</kbd></button>
       <button class="btn primary" id="btnNext" type="button" data-autofocus><span data-i="next">Дальше</span><kbd>Enter</kbd></button>
     </div>
   </div>
@@ -423,6 +412,19 @@ footer a{color:var(--muted)}
     <div class="modal-actions">
       <button class="btn" id="btnCustomCancel" type="button" data-i="cancel">Отмена</button>
       <button class="btn primary" id="btnCustomGo" type="button" data-i="customGo">Печатать</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Окно «Предложить идею» ===== -->
+<div class="modal" id="feedbackModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="fbModalTitle">
+    <h2 id="fbModalTitle" data-i="fbBtn">Предложить идею</h2>
+    <p class="muted" data-i="fbHelp"></p>
+    <textarea id="fbText" maxlength="3000" data-ph="fbPh" data-autofocus></textarea>
+    <div class="modal-actions">
+      <button class="btn" id="btnFbCancel" type="button" data-i="cancel">Отмена</button>
+      <button class="btn primary" id="btnFbSend" type="button" data-i="fbSend">Отправить</button>
     </div>
   </div>
 </div>
@@ -507,6 +509,11 @@ footer a{color:var(--muted)}
     code: []
   };
 
+  // дополнительные слова — чтобы упражнения не повторялись
+  WORDS.ru = WORDS.ru.concat(('авто адрес аист акула альбом ананас апельсин аптека астра атлас бабушка бабочка багаж балкон банан банка баран барабан бассейн батон башня берег береза беседа библиотека билет бинокль блин блокнот блюдо бобер болото борщ ботинок бочка браслет бревно бублик букет бульвар бумага бутерброд вагон валенки ванна варенье ведро великан велосипед верблюд веревка вершина весло взгляд вилка виноград вкус внук вокзал волна ворона ворота восток вратарь выставка галстук гвоздь герой гитара глина гном голубь горка гость грибник грузовик губка гусь дача дверь двор девочка дедушка дельфин деревня джем диван дневник доброта доктор дорожка дружба дуб дятел жаба жасмин железо жираф журнал забор завтрак загадка закат замок записка заяц звонок здание зебра зеркало зонтик игрушка избушка изюм индюк иней искра кабинет кактус калач камень канал капуста карандаш карман картина картошка каток качели квартира кенгуру кефир кино кисть клубника ковер колесо колокол комар комната компот конфета корзина космос костер котенок кофта кошелек кресло крокодил кролик кружка крыльцо кузнечик лагерь лампа ландыш ласточка лебедь лейка лента лестница лимон линейка лисенок листок лошадь луна лыжи магазин малина мальчик марка маска матрешка медведь мелодия мельница метла мечта миска мишка молния мороженое морж мотор муравей мышка набор наушники небосвод носок облако овощи огород огурец одеяло озеро окунь олень орел осина остров отдых отец охота очки палатка пальто памятник панда папка парус паук пенал печенье пирог письмо планета платье пледы площадь подарок подушка поезд полка помидор портфель посуда праздник прогулка пряник птенец пчела пылесос радио ракета ракушка расческа ребенок река ремень речка рисунок роза ромашка рубашка рукавица ручей рюкзак салат самокат сапоги сарай свеча свитер сказка скамейка скрипка слон смех снеговик снежинка сова сосна спичка спутник стакан станция стрекоза страница строитель сумка сундук сыр таблица тарелка телефон тигр толстый торт трактор трамвай трубка тыква удочка улитка урожай утенок учебник учитель фантик фигура флаг фонарь футбол хомяк хоккей художник цапля цирк цыпленок чайник часовщик черепаха чернила чемодан чудо шарик шахматы шишка шоколад шуба щетка экран юла ягненок ящерица ящик бегать верить весело гулять дарить дружить ждать звать искать катать класть кормить лепить летать ловить мечтать мыть нести носить петь плавать прыгать рисовать сидеть спать спешить строить считать танцевать убирать узнать улыбаться ходить шагать шить яркий теплый холодный мокрый сухой сладкий кислый горький чистый грязный светлый темный длинный короткий широкий узкий высокий низкий смелый ловкий сильный слабый вкусный любимый настоящий интересный прекрасный').split(' '));
+  WORDS.en = WORDS.en.concat(('able about above after again against along always among animal answer area arm around art asked away baby back bag bake bear beat beautiful became because bed been before began behind being bell below best better between bike bill bird birthday blow board boat body bottle bottom box brave break bright brother build busy buy cake call came camp candy cap card careful carry case catch caught center chair change cheese chicken child children choose circle class clean clear climb clock close cloth clothes coat coffee color come common cook corner cotton could count country cousin cover cow crowd cry cut dance dark daughter dear decide desk dinner direction dish doctor does done draw dream dress drink drive drop dry duck during each early earth easy eat edge egg eight else end enjoy enough even evening ever every example eye face fact fair fall farm father feet fell felt few fight fill final finger finish fire flower fly follow food foot forest forget form forward found four free fresh front fruit full game garden gate gift girl glad glass gold gone grass gray ground group grow guess hair half happen hard hat head hear heart heavy hello hill hold hole holiday hope horse hot hour huge human hungry hurry idea inside island jacket job join joke juice jump just key kind king kitchen kite knee knew lake lamp land language large laugh lead leaf learn least leave less letter life lift line lion list little long lost loud lucky lunch machine magic main map mark market matter maybe meet middle might mind minute mirror miss money monkey morning mother mountain mouse mouth much near neck nest never night nine noise north note nothing notice number ocean office often orange order other outside paint pair paper parent party pass past pay pen pencil picture piece pink place plan plane plant plate please pocket point pond pretty prize problem pull push queen question quiet rabbit race rain rainbow ready reason remember rest rich ring river road rock roof rope round rule safe said sail salt sand save scarf science sea season seat second secret seed sell send seven shape share sheep shell ship shirt shoe shop short shout show shy side sign silver simple sing sister sit size skate sky sleep smile snake snow soft song soon sound soup south space speak special spend spoon spring square stairs stand station stay step stick still stone store storm straight strange strong sugar summer supper sure surprise sweet swim table tail talk tall taste tea team tell ten tent test than thank thing three throw ticket tiger tired together tomorrow tonight tooth top touch tower town toy train travel tree trip truck turtle twelve under until upon useful usual valley village visit voice wait walk wall warm wash watch wave weather wheel where while whole wide wild wind window winter wish without woman wonder wood wool world write wrong yellow young').split(' '));
+  ['ru', 'en'].forEach(function (m) { WORDS[m] = WORDS[m].filter(function (w, i, a) { return w && a.indexOf(w) === i; }); });
+
   /* ===================== УРОКИ =====================
      n — название уровня; l — уроки.
      k — новые клавиши (упражнение из букв и слов); rv — повторение;
@@ -517,42 +524,74 @@ footer a{color:var(--muted)}
       { n: { ru: 'Основной ряд', en: 'Home row' }, l: [{ k: 'ао' }, { k: 'вл' }, { k: 'ыд' }, { k: 'фж' }, { k: 'пр' }, { k: 'э' }, { rv: 1 }] },
       { n: { ru: 'Верхний ряд', en: 'Top row' }, l: [{ k: 'ке' }, { k: 'нг' }, { k: 'уш' }, { k: 'цщ' }, { k: 'йз' }, { k: 'хъ' }, { rv: 1 }] },
       { n: { ru: 'Нижний ряд', en: 'Bottom row' }, l: [{ k: 'ми' }, { k: 'ть' }, { k: 'сб' }, { k: 'чю' }, { k: 'я.' }, { rv: 1 }] },
+      { n: { ru: 'Слова', en: 'Words' }, l: [
+        { t: { ru: 'Короткие слова', en: 'Short words' }, wl: [2, 4], cnt: 34 },
+        { t: { ru: 'Средние слова', en: 'Medium words' }, wl: [5, 7], cnt: 28 },
+        { t: { ru: 'Длинные слова', en: 'Long words' }, wl: [8, 20], cnt: 20 },
+        { t: { ru: 'Любые слова', en: 'Any words' }, wl: [1, 30], cnt: 34 },
+        { t: { ru: 'Марафон слов', en: 'Word marathon' }, wl: [1, 30], cnt: 60 }
+      ] },
       { n: { ru: 'Заглавные буквы', en: 'Capital letters' }, l: [
         { t: { ru: 'Левая рука', en: 'Left hand' }, w: 'Анна Вика Ева Ирина Карина Маша Света Уля Фаина Яна Айдар Арман Ерлан Ислам Максим Павел Самат Чингиз Аян Ваня Ильяс Камила'.split(' ') },
         { t: { ru: 'Правая рука', en: 'Right hand' }, w: 'Олег Ольга Роман Лена Дина Жанна Эля Нурлан Галина Шамиль Зарина Тимур Борис Юлия Руслан Лейла Дамир Жансая Эрик Нина Оля Гульнара'.split(' ') },
         { t: { ru: 'Города и страны', en: 'Cities and countries' }, w: 'Алматы Астана Шымкент Караганда Актобе Тараз Павлодар Костанай Атырау Туркестан Москва Казахстан Россия Европа Азия Байкал Волга Каспий Алтай Париж Лондон'.split(' ') }
       ] },
       { n: { ru: 'Знаки и цифры', en: 'Punctuation and numbers' }, l: [
-        { t: { ru: 'Точка', en: 'Period' }, cnt: 6, s: ['Мама мыла раму.', 'Кот спит.', 'Идет дождь.', 'Светит солнце.', 'Я люблю читать.', 'Мы идем в школу.', 'Папа читает газету.', 'Брат играет в мяч.', 'Сегодня тепло.', 'Река быстрая.'] },
-        { t: { ru: 'Запятая', en: 'Comma' }, cnt: 4, s: ['Утром, днем и вечером я читаю.', 'Яблоки, груши и сливы растут в саду.', 'Если идет дождь, мы сидим дома.', 'Я встал, умылся и сел завтракать.', 'Мама, папа и я гуляем в парке.', 'Зимой холодно, а летом жарко.', 'Когда я вырасту, я стану врачом.', 'Кошка, собака и попугай живут дружно.'] },
-        { t: { ru: 'Вопрос и восклицание', en: 'Question and exclamation' }, cnt: 6, s: ['Как тебя зовут?', 'Сколько тебе лет?', 'Ура, каникулы!', 'Какой сегодня день?', 'Привет, как дела?', 'Отлично, молодец!', 'Где мой рюкзак?', 'Вперед, к победе!'] },
-        { t: { ru: 'Цифры', en: 'Numbers' }, cnt: 4, s: ['В классе 25 учеников.', 'Мой дом номер 17.', 'В году 12 месяцев и 365 дней.', 'Урок длится 45 минут.', 'Мне 10 лет, а брату 7.', 'Поезд уходит в 8 часов 30 минут.', 'В неделе 7 дней.', 'У паука 8 ног.'] }
+        { t: { ru: 'Точка', en: 'Period' }, cnt: 9, s: ['Солнце село за горы.', 'Мы купили новый мяч.', 'На столе лежит книга.', 'Бабушка печет пироги.', 'Утром был туман.', 'Собака спит у двери.', 'Мама мыла раму.', 'Кот спит.', 'Идет дождь.', 'Светит солнце.', 'Я люблю читать.', 'Мы идем в школу.', 'Папа читает газету.', 'Брат играет в мяч.', 'Сегодня тепло.', 'Река быстрая.'] },
+        { t: { ru: 'Запятая', en: 'Comma' }, s: ['Утром, днем и вечером я читаю.', 'Яблоки, груши и сливы растут в саду.', 'Если идет дождь, мы сидим дома.', 'Я встал, умылся и сел завтракать.', 'Мама, папа и я гуляем в парке.', 'Зимой холодно, а летом жарко.', 'Когда я вырасту, я стану врачом.', 'Кошка, собака и попугай живут дружно.', 'Летом мы плаваем, загораем и играем в мяч.', 'Если хочешь быстро печатать, тренируйся каждый день.', 'В лесу растут сосны, ели, березы и дубы.', 'Я взял ручку, тетрадь и учебник.'], cnt: 6 },
+        { t: { ru: 'Вопрос и восклицание', en: 'Question and exclamation' }, cnt: 9, s: ['Ты любишь мороженое?', 'Какая красивая радуга!', 'Куда ты идешь?', 'Мы победили!', 'Почему небо голубое?', 'Как тебя зовут?', 'Сколько тебе лет?', 'Ура, каникулы!', 'Какой сегодня день?', 'Привет, как дела?', 'Отлично, молодец!', 'Где мой рюкзак?', 'Вперед, к победе!'] },
+        { t: { ru: 'Цифры', en: 'Numbers' }, s: ['В классе 25 учеников.', 'Мой дом номер 17.', 'В году 12 месяцев и 365 дней.', 'Урок длится 45 минут.', 'Мне 10 лет, а брату 7.', 'Поезд уходит в 8 часов 30 минут.', 'В неделе 7 дней.', 'У паука 8 ног.', 'В нашем доме 9 этажей.', 'Мы прошли 15 километров.', 'В коробке 24 карандаша.', 'Поезд номер 102 прибывает в 14 часов.'], cnt: 6 }
       ] },
       { n: { ru: 'Тексты', en: 'Texts' }, l: [
-        { t: { ru: 'Пословицы', en: 'Proverbs' }, cnt: 4, s: ['Тише едешь, дальше будешь.', 'Без труда не выловишь и рыбку из пруда.', 'Повторение мать учения.', 'Друг познается в беде.', 'Век живи, век учись.', 'Делу время, потехе час.', 'Терпение и труд все перетрут.', 'Глаза боятся, а руки делают.'] },
-        { t: { ru: 'Скороговорки', en: 'Tongue twisters' }, cnt: 3, s: ['Шла Саша по шоссе и сосала сушку.', 'Карл у Клары украл кораллы, а Клара у Карла украла кларнет.', 'На дворе трава, на траве дрова.', 'Ехал Грека через реку, видит Грека в реке рак.', 'Корабли лавировали, лавировали, да не вылавировали.'] },
+        { t: { ru: 'Пословицы', en: 'Proverbs' }, cnt: 7, s: ['Не откладывай на завтра то, что можно сделать сегодня.', 'Семь раз отмерь, один раз отрежь.', 'Ученье свет, а неученье тьма.', 'Дело мастера боится.', 'Под лежачий камень вода не течет.', 'Не имей сто рублей, а имей сто друзей.', 'Слово не воробей, вылетит не поймаешь.', 'Худой мир лучше доброй ссоры.', 'Тише едешь, дальше будешь.', 'Без труда не выловишь и рыбку из пруда.', 'Повторение мать учения.', 'Друг познается в беде.', 'Век живи, век учись.', 'Делу время, потехе час.', 'Терпение и труд все перетрут.', 'Глаза боятся, а руки делают.'] },
+        { t: { ru: 'Скороговорки', en: 'Tongue twisters' }, cnt: 5, s: ['Мама мыла Милу мылом.', 'От топота копыт пыль по полю летит.', 'Шесть мышат в камышах шуршат.', 'Три сороки тараторки тараторили на горке.', 'Белые бараны били в барабаны.', 'Шла Саша по шоссе и сосала сушку.', 'Карл у Клары украл кораллы, а Клара у Карла украла кларнет.', 'На дворе трава, на траве дрова.', 'Ехал Грека через реку, видит Грека в реке рак.', 'Корабли лавировали, лавировали, да не вылавировали.'] },
         { t: { ru: 'Все буквы алфавита', en: 'All letters' }, cnt: 2, s: ['Съешь же еще этих мягких французских булок, да выпей чаю.', 'В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!', 'Широкая электрификация южных губерний даст мощный толчок подъему сельского хозяйства.'] }
+      ] },
+      { n: { ru: 'Рассказы', en: 'Stories' }, l: [
+        { t: { ru: 'Утро', en: 'Morning' }, cnt: 1, s: ['Утром Маша проснулась рано. За окном светило солнце и пели птицы. Она быстро умылась, позавтракала и пошла в школу. По дороге она встретила свою подругу Дину, и они весело болтали о каникулах.'] },
+        { t: { ru: 'Щенок', en: 'Puppy' }, cnt: 1, s: ['У Тимура есть щенок по имени Барсик. Каждый вечер они гуляют в парке. Барсик любит гоняться за голубями и приносить палку. Когда идет дождь, они сидят дома и смотрят мультфильмы.'] },
+        { t: { ru: 'На озере', en: 'At the lake' }, cnt: 1, s: ['Летом наша семья поехала на озеро. Папа ставил палатку, мама готовила обед на костре, а мы с братом ловили рыбу. Вечером мы смотрели на звезды и слушали, как стрекочут кузнечики.'] },
+        { t: { ru: 'Зима в горах', en: 'Winter in the mountains' }, cnt: 1, s: ['Зимой в Алматы выпадает много снега. Дети катаются на санках с горки и лепят снеговиков. Горы вокруг города становятся белыми, а воздух чистым и морозным. Вечером так приятно пить горячий чай дома.'] },
+        { t: { ru: 'Пчела', en: 'The bee' }, cnt: 1, s: ['Пчела весь день летала с цветка на цветок. Она собирала нектар, чтобы сделать сладкий мед. Вечером пчела вернулась в улей, где ее ждали сестры. Вместе они трудились до самой ночи.'] },
+        { t: { ru: 'Библиотека', en: 'Library' }, cnt: 1, s: ['В библиотеке тихо и уютно. На полках стоят тысячи книг: сказки, энциклопедии, рассказы о путешествиях. Можно взять любую книгу домой и читать ее целую неделю, а потом вернуть и выбрать новую.'] },
+        { t: { ru: 'Космос', en: 'Space' }, cnt: 1, s: ['Космонавты долго готовятся к полету. Они учатся работать в невесомости, изучают ракету и много занимаются спортом. Первый полет человека в космос состоялся 12 апреля 1961 года, и с тех пор люди мечтают долететь до других планет.'] },
+        { t: { ru: 'Слепая печать', en: 'Touch typing' }, cnt: 1, s: ['Компьютер помогает людям работать, учиться и играть. Чтобы печатать быстро, нужно знать, где находятся все буквы. Если заниматься каждый день по десять минут, через месяц руки сами запомнят клавиатуру, и смотреть на нее больше не придется.'] }
       ] }
     ],
     en: [
       { n: { ru: 'Основной ряд', en: 'Home row' }, l: [{ k: 'fj' }, { k: 'dk' }, { k: 'sl' }, { k: 'a;' }, { k: 'gh' }, { rv: 1 }] },
       { n: { ru: 'Верхний ряд', en: 'Top row' }, l: [{ k: 'ei' }, { k: 'ru' }, { k: 'ty' }, { k: 'wo' }, { k: 'qp' }, { rv: 1 }] },
       { n: { ru: 'Нижний ряд', en: 'Bottom row' }, l: [{ k: 'vm' }, { k: 'bn' }, { k: 'c,' }, { k: 'x.' }, { k: 'z/' }, { rv: 1 }] },
+      { n: { ru: 'Слова', en: 'Words' }, l: [
+        { t: { ru: 'Короткие слова', en: 'Short words' }, wl: [2, 4], cnt: 34 },
+        { t: { ru: 'Средние слова', en: 'Medium words' }, wl: [5, 7], cnt: 28 },
+        { t: { ru: 'Длинные слова', en: 'Long words' }, wl: [8, 20], cnt: 20 },
+        { t: { ru: 'Любые слова', en: 'Any words' }, wl: [1, 30], cnt: 34 },
+        { t: { ru: 'Марафон слов', en: 'Word marathon' }, wl: [1, 30], cnt: 60 }
+      ] },
       { n: { ru: 'Заглавные буквы', en: 'Capital letters' }, l: [
         { t: { ru: 'Левая рука', en: 'Left hand' }, w: 'Anna Bob Carl David Eva Fred Grace Steve Rose Sara Ted Vera Walter Zack Adam Ben Clara Daisy Ella Greg'.split(' ') },
         { t: { ru: 'Правая рука', en: 'Right hand' }, w: 'John Kate Lily Mike Nick Olivia Paul Henry Ian Ken Leo Mia Noah Oscar Peter Jim Lucy Hugo Molly Nora'.split(' ') },
         { t: { ru: 'Города и дни', en: 'Cities and days' }, w: 'London Paris Tokyo Berlin Madrid Rome Sydney Dubai Almaty Astana Canada Texas Monday Friday Sunday April June English Python Google'.split(' ') }
       ] },
       { n: { ru: 'Знаки и цифры', en: 'Punctuation and numbers' }, l: [
-        { t: { ru: 'Точка и запятая', en: 'Period and comma' }, cnt: 5, s: ['I like apples, pears and plums.', 'My cat is black.', 'We read, write and play.', 'It is sunny today.', 'Tom, Ann and I are friends.', 'The bus is late.', 'First, wash your hands.', 'Our class is big.'] },
-        { t: { ru: 'Вопрос и восклицание', en: 'Question and exclamation' }, cnt: 6, s: ['How are you?', 'What is your name?', 'Wow, that is great!', 'Can you help me?', 'Where is my bag?', 'Well done!', 'Is it raining?', 'Hurry up!'] },
+        { t: { ru: 'Точка и запятая', en: 'Period and comma' }, cnt: 7, s: ['The sun is shining, and the birds are singing.', 'Dad made pancakes for breakfast.', 'We need eggs, milk, bread and cheese.', 'My room is small, but it is cozy.','I like apples, pears and plums.', 'My cat is black.', 'We read, write and play.', 'It is sunny today.', 'Tom, Ann and I are friends.', 'The bus is late.', 'First, wash your hands.', 'Our class is big.'] },
+        { t: { ru: 'Вопрос и восклицание', en: 'Question and exclamation' }, cnt: 9, s: ['Do you like ice cream?', 'What a beautiful day!', 'Where are you going?', 'We won!', 'Why is the sky blue?', 'How are you?', 'What is your name?', 'Wow, that is great!', 'Can you help me?', 'Where is my bag?', 'Well done!', 'Is it raining?', 'Hurry up!'] },
         { t: { ru: 'Апостроф', en: 'Apostrophe' }, cnt: 6, s: ["I'm happy.", "Don't stop now.", "It's a sunny day.", "We're best friends.", "You can't miss it.", "That's my book.", "Let's play!", "She's very kind."] },
         { t: { ru: 'Цифры', en: 'Numbers' }, cnt: 4, s: ['I have 3 cats and 2 dogs.', 'School starts at 8:30.', 'A year has 365 days.', 'There are 24 hours in a day.', 'My brother is 12.', 'Room 404 is closed.', 'We need 10 apples.', 'The game ends at 7:45.'] }
       ] },
       { n: { ru: 'Тексты', en: 'Texts' }, l: [
-        { t: { ru: 'Пословицы', en: 'Proverbs' }, cnt: 4, s: ['Practice makes perfect.', 'Slow and steady wins the race.', 'Better late than never.', 'Actions speak louder than words.', 'Knowledge is power.', 'Where there is a will, there is a way.', 'Every day is a new start.'] },
+        { t: { ru: 'Пословицы', en: 'Proverbs' }, cnt: 6, s: ['The early bird catches the worm.', 'Two heads are better than one.', 'Look before you leap.', 'Great minds think alike.', 'Time is money.', 'Practice makes perfect.', 'Slow and steady wins the race.', 'Better late than never.', 'Actions speak louder than words.', 'Knowledge is power.', 'Where there is a will, there is a way.', 'Every day is a new start.'] },
         { t: { ru: 'Скороговорки', en: 'Tongue twisters' }, cnt: 3, s: ['She sells sea shells by the sea shore.', 'Peter Piper picked a peck of pickled peppers.', 'How much wood would a woodchuck chuck?', 'Red lorry, yellow lorry.', 'Fresh fried fish, fish fresh fried.'] },
         { t: { ru: 'Все буквы алфавита', en: 'All letters' }, cnt: 2, s: ['The quick brown fox jumps over the lazy dog.', 'Sphinx of black quartz, judge my vow.', 'How vexingly quick daft zebras jump!', 'The five boxing wizards jump quickly.'] }
+      ] },
+      { n: { ru: 'Рассказы', en: 'Stories' }, l: [
+        { t: { ru: 'Прогулка с собакой', en: 'Dog walk' }, cnt: 1, s: ['Every morning Tom walks his dog in the park. The dog loves to run after the ball and bark at the birds. After the walk they go home and have breakfast together. Then Tom goes to school and the dog sleeps on the sofa.'] },
+        { t: { ru: 'Как велосипед', en: 'Like a bike' }, cnt: 1, s: ['Learning to type is like learning to ride a bike. At first it feels slow and hard, but every day it gets a little easier. Soon your fingers will find the keys on their own, and you will not need to look down at all.'] },
+        { t: { ru: 'Библиотека', en: 'Library' }, cnt: 1, s: ['The library is a quiet place full of books. You can read about space, animals, history and faraway countries. If you like a book, you can take it home for a week and then come back for a new one.'] },
+        { t: { ru: 'Поход', en: 'Camping' }, cnt: 1, s: ['In summer our family went camping by the lake. Dad set up the tent, Mom cooked dinner on the fire, and my sister and I went fishing. At night we watched the stars and listened to the crickets.'] },
+        { t: { ru: 'Программист', en: 'Programmer' }, cnt: 1, s: ['Computers help people work, learn and play. A good programmer writes clean code and tests it often. Typing fast saves a lot of time when you write programs every day, so it is worth practicing a little each morning.'] },
+        { t: { ru: 'Пчела', en: 'The bee' }, cnt: 1, s: ['The little bee flew from flower to flower all day long. It collected nectar to make sweet honey. In the evening it returned to the hive, tired but happy, and told the other bees where the best flowers were.'] }
       ] }
     ],
     code: [
@@ -565,21 +604,28 @@ footer a{color:var(--muted)}
         { t: { ru: 'Основные', en: 'Basics' }, w: ['if', 'else', 'for', 'while', 'return', 'true', 'false', 'null', 'break', 'continue', 'and', 'or', 'not', 'in', 'is'] },
         { t: { ru: 'JavaScript', en: 'JavaScript' }, w: ['function', 'const', 'let', 'var', 'class', 'import', 'export', 'from', 'new', 'this', 'async', 'await', 'try', 'catch', 'throw', 'switch', 'case', 'default', 'typeof', 'console.log'] },
         { t: { ru: 'Python', en: 'Python' }, w: ['def', 'print', 'input', 'range', 'len', 'list', 'dict', 'str', 'int', 'float', 'self', 'None', 'True', 'False', 'elif', 'lambda', 'import', 'return', 'yield', 'with', 'pass'] },
-        { t: { ru: 'Выражения', en: 'Expressions' }, cnt: 12, w: ['x = 1', 'i++', 'a + b', 'n * 2', 'len(s)', 'f(x)', 'arr[0]', 'obj.name', 'x == y', 'a != b', 'i < n', 'return x;', 'i += 1', 'x > 0'] }
+        { t: { ru: 'Все вперемешку', en: 'Mixed' }, wl: [1, 40], cnt: 30 },
+        { t: { ru: 'Выражения', en: 'Expressions' }, cnt: 16, w: ['x = 1', 'i++', 'a + b', 'n * 2', 'len(s)', 'f(x)', 'arr[0]', 'obj.name', 'x == y', 'a != b', 'i < n', 'return x;', 'i += 1', 'x > 0'] }
       ] },
       { n: { ru: 'Python', en: 'Python' }, l: [
         { t: { ru: 'Функция', en: 'Function' }, c: ['def greet(name):', '    return "Hello, " + name', '', 'print(greet("World"))'] },
         { t: { ru: 'Цикл for', en: 'For loop' }, c: ['numbers = [1, 2, 3, 4, 5]', 'total = 0', 'for n in numbers:', '    total += n', 'print(total)'] },
         { t: { ru: 'Условие', en: 'Condition' }, c: ['age = int(input("Age: "))', 'if age >= 18:', '    print("Adult")', 'else:', '    print("Child")'] },
         { t: { ru: 'Класс', en: 'Class' }, c: ['class Cat:', '    def __init__(self, name):', '        self.name = name', '', '    def say(self):', '        return "Meow! I am " + self.name'] },
-        { t: { ru: 'Списки', en: 'Lists' }, c: ['squares = [x * x for x in range(10)]', 'evens = [x for x in squares if x % 2 == 0]', 'print(evens)'] }
+        { t: { ru: 'Списки', en: 'Lists' }, c: ['squares = [x * x for x in range(10)]', 'evens = [x for x in squares if x % 2 == 0]', 'print(evens)'] },
+        { t: { ru: 'Словарь', en: 'Dictionary' }, c: ['ages = {"Ann": 12, "Tom": 10}', 'ages["Kate"] = 11', 'for name, age in ages.items():', '    print(name, "is", age)'] },
+        { t: { ru: 'Цикл while', en: 'While loop' }, c: ['count = 3', 'while count > 0:', '    print(count)', '    count -= 1', 'print("Go!")'] },
+        { t: { ru: 'Файл', en: 'File' }, c: ['with open("notes.txt") as f:', '    for line in f:', '        print(line.strip())'] }
       ] },
       { n: { ru: 'JavaScript', en: 'JavaScript' }, l: [
         { t: { ru: 'Функция', en: 'Function' }, c: ['function sum(a, b) {', '  return a + b;', '}', 'console.log(sum(2, 3));'] },
         { t: { ru: 'Массив', en: 'Array' }, c: ['const fruits = ["apple", "banana", "cherry"];', 'fruits.forEach((fruit) => {', '  console.log(fruit);', '});'] },
         { t: { ru: 'Объект и условие', en: 'Object and if' }, c: ['const user = { name: "Ann", age: 12 };', 'if (user.age >= 18) {', '  console.log("adult");', '} else {', '  console.log("child");', '}'] },
         { t: { ru: 'Событие клика', en: 'Click event' }, c: ['let count = 0;', 'const button = document.querySelector("#btn");', 'button.addEventListener("click", () => {', '  count++;', '});'] },
-        { t: { ru: 'Async / await', en: 'Async / await' }, c: ['async function load(url) {', '  const res = await fetch(url);', '  return res.json();', '}'] }
+        { t: { ru: 'Async / await', en: 'Async / await' }, c: ['async function load(url) {', '  const res = await fetch(url);', '  return res.json();', '}'] },
+        { t: { ru: 'Map и filter', en: 'Map and filter' }, c: ['const nums = [1, 2, 3, 4, 5, 6];', 'const even = nums.filter((n) => n % 2 === 0);', 'const doubled = even.map((n) => n * 2);', 'console.log(doubled);'] },
+        { t: { ru: 'Класс', en: 'Class' }, c: ['class Dog {', '  constructor(name) {', '    this.name = name;', '  }', '  bark() {', '    return this.name + " says woof";', '  }', '}'] },
+        { t: { ru: 'Цикл for', en: 'For loop' }, c: ['for (let i = 1; i <= 5; i++) {', '  console.log("Step " + i);', '}'] }
       ] },
       { n: { ru: 'HTML и CSS', en: 'HTML and CSS' }, l: [
         { t: { ru: 'Страница', en: 'Page' }, c: ['<!DOCTYPE html>', '<html>', '  <body>', '    <h1>Hello!</h1>', '    <p>My first page.</p>', '  </body>', '</html>'] },
@@ -599,36 +645,37 @@ footer a{color:var(--muted)}
   /* ===================== ТЕКСТЫ ИНТЕРФЕЙСА ===================== */
   var T = {
     ru: {
-      title: 'PracticeTap — тренажёр слепой печати онлайн: русский, английский и код',
-      tagline: 'тренажёр слепой печати', modeRu: 'Русский', modeEn: 'English', modeCode: 'Код',
+      title: 'PracticeTap — тренажер слепой печати онлайн: русский, английский и код',
+      tagline: 'тренажер слепой печати', modeRu: 'Русский', modeEn: 'English', modeCode: 'Код',
       g1: 'Выбери язык и урок', g2: 'Поставь пальцы, как на картинке внизу', g3: 'Печатай подсвеченную букву, не глядя на клавиатуру',
       level: 'Уровень', keys: 'Буквы', review: 'Повторение', special: 'Особое задание',
       speed: 'зн/мин', acc: 'точность', errors: 'ошибки', time: 'время',
       restart: 'Заново', custom: 'Свой текст', keyboard: 'Клавиатура',
-      startPre: 'Начни печатать →', startPost: 'Таймер включится сам.',
+      startPre: 'Начни печатать →', startPost: 'Таймер включится сам. Esc — закончить урок и посмотреть результат.',
       press: 'Нажми', hold: 'Зажми', and: 'и нажми', space: 'пробел',
       fingers: { lp: 'левый мизинец', lr: 'левый безымянный', lm: 'левый средний', li: 'левый указательный', ri: 'правый указательный', rm: 'правый средний', rr: 'правый безымянный', rp: 'правый мизинец', th: 'большой палец' },
       caps: 'Выключи Caps Lock — сейчас все буквы печатаются заглавными',
       toRu: 'Включена английская раскладка. Переключи на русскую: Alt+Shift или Win+Пробел (Windows), Ctrl+Пробел (Mac)',
       toEn: 'Включена русская раскладка. Переключи на английскую: Alt+Shift или Win+Пробел (Windows), Ctrl+Пробел (Mac)',
       tap: 'Нажми на текст, чтобы открыть клавиатуру',
-      handsRu: 'Левая рука — на Ф Ы В А, правая — на О Л Д Ж, большие пальцы — на пробеле. Светится палец, которым нажимать следующую клавишу.',
-      handsEn: 'Левая рука — на A S D F, правая — на J K L ;, большие пальцы — на пробеле. Светится палец, которым нажимать следующую клавишу.',
       lg1: 'мизинцы', lg2: 'безымянные', lg3: 'средние', lg4: 'указательные', lg5: 'большие — пробел', left: 'левая', right: 'правая',
       statsTitle: 'Моя статистика', lessonsDone: 'уроков пройдено', best: 'лучшая скорость', typed: 'знаков напечатано',
       errTitle: 'Где больше всего ошибок', errNote: 'Цвет полоски — палец, которым нажимается клавиша.', noErr: 'Ошибок пока нет — так держать!',
       trouble: 'Тренировать трудные буквы', troubleTitle: 'Трудные буквы',
       troubleEmpty: 'Сначала пройди пару уроков — тогда здесь появятся буквы, на которых ты ошибаешься.',
-      reset: 'Сбросить статистику', resetSure: 'Нажми ещё раз, чтобы сбросить',
-      res1: 'Неплохо! Попробуй ещё раз — получится лучше.', res2: 'Хорошо! До трёх звёзд совсем чуть-чуть.', res3: 'Супер! Отличная точность!',
-      starsNote: 'Звёзды даются за точность: 98% и выше — три звезды, 93% и выше — две.',
-      cpmShort: 'зн/мин', wpmNote: 'слов/мин', resErr: 'Ошибки в этом уроке', again: 'Ещё раз', next: 'Дальше',
+      reset: 'Сбросить статистику', resetSure: 'Нажми еще раз, чтобы сбросить',
+      res1: 'Неплохо! Попробуй еще раз — получится лучше.', res2: 'Хорошо! До трех звезд совсем чуть-чуть.', res3: 'Супер! Отличная точность!',
+      starsNote: 'Звезды даются за точность: 98% и выше — три звезды, 93% и выше — две.',
+      cpmShort: 'зн/мин', wpmNote: 'слов/мин', resErr: 'Ошибки в этом уроке', again: 'Еще раз', next: 'Дальше',
       customTitle: 'Свой текст', customHelp: 'Вставь любой текст: стихотворение, домашнее задание или код. Переносы строк сохранятся.',
       customPh: 'Например: Мороз и солнце, день чудесный!', customGo: 'Печатать', cancel: 'Отмена',
       footerPrivacy: 'Политика конфиденциальности',
-      themeTip: 'Светлая или тёмная тема', soundTip: 'Звук при ошибке', focusTip: 'Во время печати прячет всё лишнее',
+      themeTip: 'Светлая или темная тема', soundTip: 'Звук при ошибке', focusTip: 'Во время печати прячет все лишнее',
       langTip: 'Язык интерфейса', kbTip: 'Показать или скрыть клавиатуру и руки', focus: 'Фокус',
-      howto: ''
+      fbTitle: 'Есть идея, как сделать сайт лучше?', fbText: 'Напиши, что добавить или исправить, — разработчик прочитает каждое сообщение.',
+      fbBtn: 'Предложить идею', fbHelp: 'Напиши свое предложение. После нажатия «Отправить» откроется почта с готовым письмом. Если почта не открылась, напиши на dester1310@gmail.com.',
+      fbPh: 'Например: добавьте уроки на казахском языке', fbSend: 'Отправить', fbSubject: 'PracticeTap: предложение',
+      resStop: 'Урок остановлен. Вот что получилось:'
     },
     en: {
       title: 'PracticeTap — free online touch typing trainer: Russian, English and code',
@@ -637,15 +684,13 @@ footer a{color:var(--muted)}
       level: 'Level', keys: 'Keys', review: 'Review', special: 'Special task',
       speed: 'WPM', acc: 'accuracy', errors: 'mistakes', time: 'time',
       restart: 'Restart', custom: 'My text', keyboard: 'Keyboard',
-      startPre: 'Start typing →', startPost: 'The timer starts by itself.',
+      startPre: 'Start typing →', startPost: 'The timer starts by itself. Esc — stop and see your result.',
       press: 'Press', hold: 'Hold', and: 'and press', space: 'space',
       fingers: { lp: 'left pinky', lr: 'left ring finger', lm: 'left middle finger', li: 'left index finger', ri: 'right index finger', rm: 'right middle finger', rr: 'right ring finger', rp: 'right pinky', th: 'thumb' },
       caps: 'Turn off Caps Lock — all letters come out as capitals',
       toRu: 'The English layout is on. Switch to Russian: Alt+Shift or Win+Space (Windows), Ctrl+Space (Mac)',
       toEn: 'The Russian layout is on. Switch to English: Alt+Shift or Win+Space (Windows), Ctrl+Space (Mac)',
       tap: 'Tap the text to open the keyboard',
-      handsRu: 'Left hand on Ф Ы В А, right hand on О Л Д Ж, thumbs on the space bar. The glowing finger presses the next key.',
-      handsEn: 'Left hand on A S D F, right hand on J K L ;, thumbs on the space bar. The glowing finger presses the next key.',
       lg1: 'pinkies', lg2: 'ring fingers', lg3: 'middle fingers', lg4: 'index fingers', lg5: 'thumbs — space', left: 'left', right: 'right',
       statsTitle: 'My stats', lessonsDone: 'lessons done', best: 'best speed', typed: 'characters typed',
       errTitle: 'Where you make the most mistakes', errNote: 'Bar colour shows the finger that presses the key.', noErr: 'No mistakes yet — keep it up!',
@@ -660,12 +705,10 @@ footer a{color:var(--muted)}
       footerPrivacy: 'Privacy policy',
       themeTip: 'Light or dark theme', soundTip: 'Sound on mistakes', focusTip: 'Hides everything extra while you type',
       langTip: 'Interface language', kbTip: 'Show or hide the keyboard and hands', focus: 'Focus',
-      howto: '<h2>How to learn touch typing</h2><div class="tips">' +
-        '<div class="tip"><span class="tip-n">1</span><h3>Fingers in place</h3><p>Your left hand rests on A S D F, your right hand on J K L ;. The F and J keys have little bumps you can feel.</p></div>' +
-        '<div class="tip"><span class="tip-n">2</span><h3>Eyes on the screen</h3><p>Do not peek at the keyboard. The key colour and the glowing finger tell you which finger to use.</p></div>' +
-        '<div class="tip"><span class="tip-n">3</span><h3>Accuracy first</h3><p>Type without mistakes, even if slowly. Speed comes by itself with 10–15 minutes of practice a day.</p></div></div>' +
-        '<h3>Typing trainer for programmers</h3><p>The Code section has brackets and operators, keywords and real examples in Python, JavaScript, HTML, CSS, SQL and Git commands. Indentation is added automatically after Enter, just like in a code editor.</p>' +
-        '<h3>Shortcuts</h3><p><kbd>Esc</kbd> — restart the lesson, <kbd>Enter</kbd> — next lesson on the results screen. Made a mistake? Just press the right key, there is nothing to delete.</p>'
+      fbTitle: 'Have an idea to make the site better?', fbText: 'Tell us what to add or fix — the developer reads every message.',
+      fbBtn: 'Suggest an idea', fbHelp: 'Write your suggestion. After you press Send, your email app opens with a ready message. If it does not open, write to dester1310@gmail.com.',
+      fbPh: 'For example: add lessons in Kazakh', fbSend: 'Send', fbSubject: 'PracticeTap: suggestion',
+      resStop: 'Lesson stopped. Here is how you did:'
     }
   };
 
@@ -720,7 +763,7 @@ footer a{color:var(--muted)}
     var pool = review ? words : words.filter(function (w) { return hasAny(w, newK); });
     var useW = pool.length >= (review ? 6 : 3);
     var items = [], prev = '';
-    for (var n = 0; n < 20; n++) {
+    for (var n = 0; n < 28; n++) {
       var it = (useW && (review || Math.random() < 0.45)) ? pick(pool) : group(newK, all);
       if (it === prev) it = group(newK, all);
       items.push(it); prev = it;
@@ -737,8 +780,12 @@ footer a{color:var(--muted)}
     if (L.c) return { text: L.c.join(NL), block: true };
     if (L.k || L.rv) { var all = learnedKeys(mode, lv, i); return { text: drillText(mode, L.k || all, all, !!L.rv), block: false }; }
     if (L.s) return { text: shuffle(L.s).slice(0, L.cnt || 4).join(' '), block: false };
-    if (L.w) return { text: wordsText(L.w, L.cnt || 16), block: false };
-    if (L.sym) return { text: wordsText(L.sym, L.cnt || 18), block: false };
+    if (L.w) return { text: wordsText(L.w, L.cnt || 24), block: false };
+    if (L.sym) return { text: wordsText(L.sym, L.cnt || 24), block: false };
+    if (L.wl) {
+      var pool = WORDS[mode].filter(function (w) { return w.length >= L.wl[0] && w.length <= L.wl[1]; });
+      return { text: wordsText(pool, L.cnt || 28), block: false };
+    }
     return { text: '...', block: false };
   }
   function lessonTitle(mode, lv, i) {
@@ -783,7 +830,8 @@ footer a{color:var(--muted)}
       for (var c = 0; c < base.length; c++) {
         var b = base.charAt(c), s = sh.charAt(c), f = FMAP[r][c];
         var el = makeKey(row, (r === 1 && c === base.length - 1) ? 1.5 : 1, f);
-        if (isLetter(b)) el.textContent = b.toUpperCase();
+        if (b === 'ё') el.textContent = '';   // клавишу с этой буквой показываем пустой
+        else if (isLetter(b)) el.textContent = b.toUpperCase();
         else el.innerHTML = '<span class="sub">' + esc(s) + '</span>' + esc(b);
         if (HOME_BUMP[S.layout].indexOf(b) >= 0) el.classList.add('bump');
         S.keyMap[b] = { el: el, f: f, shift: false };
@@ -805,17 +853,15 @@ footer a{color:var(--muted)}
   // [палец, x, y, высота] для левой руки; правая рисуется зеркально
   var HAND = [['lp', 44, 78, 84], ['lr', 90, 46, 116], ['lm', 136, 32, 130], ['li', 182, 48, 114]];
   function buildHands() {
-    var W = 640, FW = 40, letters = HOME_KEYS[S.layout], out = '';
-    function finger(id, x, y, h, letter) {
-      var cx = x + FW / 2;
-      return '<g class="fg f-' + id + '" data-f="' + id + '"><rect x="' + x + '" y="' + y + '" width="' + FW + '" height="' + h + '" rx="20"/>' +
-        '<circle cx="' + cx + '" cy="' + (y + 22) + '" r="15"/><text x="' + cx + '" y="' + (y + 23) + '">' + esc(letter.toUpperCase()) + '</text></g>';
+    var W = 640, FW = 40, out = '';
+    function finger(id, x, y, h) {
+      return '<g class="fg f-' + id + '" data-f="' + id + '"><rect x="' + x + '" y="' + y + '" width="' + FW + '" height="' + h + '" rx="20"/></g>';
     }
     var rid = ['rp', 'rr', 'rm', 'ri'];
     for (var k = 0; k < 4; k++) {
       var h = HAND[k];
-      out += finger(h[0], h[1], h[2], h[3], letters[k]);
-      out += finger(rid[k], W - h[1] - FW, h[2], h[3], letters[7 - k]);
+      out += finger(h[0], h[1], h[2], h[3]);
+      out += finger(rid[k], W - h[1] - FW, h[2], h[3]);
     }
     out += '<g class="fg f-th" data-f="th"><rect x="222" y="128" width="40" height="96" rx="20" transform="rotate(42 242 176)"/></g>';
     out += '<g class="fg f-th" data-f="th"><rect x="' + (W - 262) + '" y="128" width="40" height="96" rx="20" transform="rotate(-42 ' + (W - 242) + ' 176)"/></g>';
@@ -825,7 +871,6 @@ footer a{color:var(--muted)}
     out += '<text class="palm-t" x="' + (W - 138) + '" y="200">' + esc(t('right')) + '</text>';
     $('hands').innerHTML = out;
     S.fingerEls = $('hands').querySelectorAll('.fg');
-    $('handsCap').textContent = t(S.layout === 'ru' ? 'handsRu' : 'handsEn');
   }
 
   /* ===================== ПОДСВЕТКА И ПОДСКАЗКА ===================== */
@@ -972,7 +1017,7 @@ footer a{color:var(--muted)}
       highlight();
       return;
     }
-    // включён Caps Lock — тоже не считаем ошибкой
+    // включен Caps Lock — тоже не считаем ошибкой
     if (!ok && S.caps && isLetter(exp) && ch.toLowerCase() === exp.toLowerCase()) {
       shake();
       highlight();
@@ -1061,7 +1106,8 @@ footer a{color:var(--muted)}
     if (S.special.layout === 'ru') return 'ru';
     return S.mode === 'code' ? 'code' : 'en';
   }
-  function finish() {
+  function finish(early) {
+    early = early === true;
     S.done = true;
     S.tEnd = Date.now();
     clearInterval(S.timer);
@@ -1076,7 +1122,7 @@ footer a{color:var(--muted)}
     var cpm = Math.round(S.correct / ms * 60000);
     var acc = S.correct / Math.max(1, S.correct + S.errors);
     var stars = acc >= 0.98 ? 3 : (acc >= 0.93 ? 2 : 1);
-    if (!S.special) {
+    if (!S.special && !early) {
       var key = S.mode + '-' + S.lv + '-' + S.i, p = S.prog[key] || { s: 0, c: 0 };
       p.s = Math.max(p.s, stars);
       p.c = Math.max(p.c, cpm);
@@ -1087,14 +1133,14 @@ footer a{color:var(--muted)}
     Object.keys(S.errMap).forEach(function (c) { st.e[c] = (st.e[c] || 0) + S.errMap[c]; });
     st.k += S.correct;
     st.ms += ms;
-    st.best = Math.max(st.best, cpm);
+    if (!early && S.correct >= 20) st.best = Math.max(st.best, cpm);   // рекорд — только за пройденный до конца урок
     store.set('pt_stats', S.stats);
     renderPicker();
     renderStats();
     var html = '';
     for (var k = 0; k < 3; k++) html += '<i' + (k < stars ? ' class="f"' : '') + '>★</i>';
-    $('resStars').innerHTML = html;
-    $('resTitle').textContent = t('res' + stars);
+    $('resStars').innerHTML = early ? '' : html;
+    $('resTitle').textContent = early ? t('resStop') : t('res' + stars);
     $('rSpeed').textContent = speedText(cpm);
     $('rSpeedL').textContent = t('speed');
     $('rSpeedSub').textContent = S.ui === 'en' ? (cpm + ' ' + t('cpmShort')) : ('≈ ' + Math.round(cpm / 5) + ' ' + t('wpmNote'));
@@ -1269,14 +1315,15 @@ footer a{color:var(--muted)}
       else if (e.key === 'Escape') { e.preventDefault(); again(); }
       return;
     }
-    if (S.modal === 'custom') {
+    if (S.modal === 'custom' || S.modal === 'feedback') {
       if (e.key === 'Escape') { e.preventDefault(); closeModal(); }
       return;
     }
     var tg = e.target;
     if (tg && tg !== $('hiddenInput') && (tg.tagName === 'TEXTAREA' || tg.tagName === 'INPUT' || tg.tagName === 'SELECT' || tg.isContentEditable)) return;
     if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
-    if (e.key === 'Escape') { e.preventDefault(); restart(); return; }
+    // Esc во время урока — сразу закончить и показать статистику
+    if (e.key === 'Escape') { e.preventDefault(); if (S.started && !S.done) finish(true); return; }
     var ch = e.key === 'Enter' ? NL : ((e.key && e.key.length === 1) ? e.key : null);
     if (ch === null) return;
     e.preventDefault();
@@ -1355,6 +1402,17 @@ footer a{color:var(--muted)}
     this.blur();
   });
   $('btnTrouble').addEventListener('click', function () { this.blur(); startTrouble(); });
+  // предложения разработчику: открываем почту с готовым письмом
+  $('btnFeedback').addEventListener('click', function () { this.blur(); openModal('feedback'); });
+  $('btnFbCancel').addEventListener('click', closeModal);
+  $('feedbackModal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+  $('btnFbSend').addEventListener('click', function () {
+    var msg = $('fbText').value.trim();
+    if (!msg) { $('fbText').focus(); return; }
+    window.location.href = 'mailto:dester1310@gmail.com?subject=' + encodeURIComponent(t('fbSubject')) + '&body=' + encodeURIComponent(msg);
+    $('fbText').value = '';
+    closeModal();
+  });
   $('btnReset').addEventListener('click', function () {
     var b = this;
     if (!b.classList.contains('sure')) {
@@ -1373,7 +1431,6 @@ footer a{color:var(--muted)}
   });
 
   /* ===================== ЗАПУСК ===================== */
-  T.ru.howto = $('howto').innerHTML;
   $('year').textContent = new Date().getFullYear();
   applyI18n();
   applyToggles();
