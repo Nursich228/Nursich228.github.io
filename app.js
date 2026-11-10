@@ -289,7 +289,7 @@
       testTitle: 'Тест скорости печати', testSub: '1 минута', testGo: 'Начать тест', testAgain: 'Новый тест',
       testDone: 'Время вышло! Вот твоя скорость:', testBest: 'Твой лучший результат', testLeft: 'осталось',
       testPick: 'Тест на 1 минуту: печатай слова, пока идет таймер',
-      navMain: 'Тренажер', navTest: 'Тест скорости печати', navKz: 'Казахская раскладка'
+      navMain: 'Тренажер', navTest: 'Тест скорости печати', navKz: 'Казахская раскладка', navArticles: 'Статьи'
     },
     en: {
       title: 'PracticeTap — free online touch typing trainer: Russian, English and code',
@@ -331,7 +331,7 @@
       testTitle: 'Typing speed test', testSub: '1 minute', testGo: 'Start test', testAgain: 'New test',
       testDone: 'Time is up! Here is your speed:', testBest: 'Your best result', testLeft: 'left',
       testPick: '1-minute test: type the words while the timer runs',
-      navMain: 'Trainer', navTest: 'Typing speed test', navKz: 'Kazakh layout'
+      navMain: 'Trainer', navTest: 'Typing speed test', navKz: 'Kazakh layout', navArticles: 'Articles'
     }
   };
 
